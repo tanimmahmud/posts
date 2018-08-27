@@ -163,8 +163,8 @@
                 <span>post</span>
             </div>
             <div class="article-info-block">
-                0
-                <span>tag</span>
+                3
+                <span>tags</span>
             </div>
         </div>
         
@@ -188,7 +188,7 @@
 
             
             <section id="main">
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-mongodb-with-mlab" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -196,7 +196,7 @@
                 
     
         <h1 itemprop="name">
-            <a class="article-title" href="/posts/2018/08/23/hello-world/">Hello World</a>
+            <a class="article-title" href="/posts/2018/08/28/mongodb-with-mlab/">Setup MongoDB with mLab</a>
         </h1>
     
 
@@ -205,14 +205,19 @@
                         
     <div class="article-date">
         <i class="fas fa-calendar-alt"></i>
-        <a href="/posts/2018/08/23/hello-world/">
-            <time datetime="2018-08-23T13:34:48.808Z" itemprop="datePublished">2018-08-23</time>
+        <a href="/posts/2018/08/28/mongodb-with-mlab/">
+            <time datetime="2018-08-27T14:54:24.000Z" itemprop="datePublished">2018-08-28</time>
         </a>
     </div>
 
 
                         
                         
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/posts/tags/Database/">Database</a>, <a class="tag-link" href="/posts/tags/MongoDB/">MongoDB</a>, <a class="tag-link" href="/posts/tags/mLab/">mLab</a>
+    </div>
+
                     </div>
                 
             </header>
@@ -221,15 +226,34 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+            <ol>
+<li><p>Createa a mLab account from <a href="https://mlab.com/" target="_blank" rel="noopener">https://mlab.com/</a></p>
+</li>
+<li><p>Create new Database </p>
+</li>
+<li><p>Go inside the Database and ‘Add database user’</p>
+</li>
+<li><p>Save username and password somewhere save. You will need these for later use.</p>
+</li>
+<li><p>Copy standard MongoDB URI</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongodb://&lt;dbuser&gt;:&lt;dbpassword&gt;@ds133252.mlab.com:33252/message-board</span><br></pre></td></tr></table></figure>
+<ol start="6">
+<li><p>Replace <dbuser> with username and <dbpassword> with password. </dbpassword></dbuser></p>
+</li>
+<li><p>Save this to your .env file </p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DB=mongodb://&lt;dbuser&gt;:&lt;dbpassword&gt;@ds133252.mlab.com:33252/message-board</span><br></pre></td></tr></table></figure>
+<ol start="8">
+<li><p>Install mongodb in you project</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install mongodb --save</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Require MongoClient and connect database with you app using following code </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Require MongoClient from mongodb package.</span></span><br><span class="line"><span class="keyword">const</span> MongoClient = <span class="built_in">require</span>(<span class="string">'mongodb'</span>).MongoClient;</span><br><span class="line"></span><br><span class="line"><span class="comment">//Database url from .env file</span></span><br><span class="line"><span class="keyword">const</span> url = process.env.DB;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Connect MongoClient with url</span></span><br><span class="line">MongoClient.connect(url, (err,db) =&gt; &#123;</span><br><span class="line">  <span class="keyword">if</span>(db)&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// get database name from db object</span></span><br><span class="line">    <span class="built_in">console</span>.log(db.s.databaseName,<span class="string">'database successfully connected'</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//Routing for API after database successfully connected</span></span><br><span class="line">    apiRoutes(app);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'database err'</span>, err);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
 
         
         </div>
@@ -240,7 +264,7 @@
 
 </div>
 
-    <a data-url="https://tanimmahmud.github.io/posts/2018/08/23/hello-world/" data-id="cjlccdv40000022pbs6rz8pyu" class="article-share-link"><i class="fas fa-share"></i>Share</a>
+    <a data-url="https://tanimmahmud.github.io/posts/2018/08/28/mongodb-with-mlab/" data-id="cjlchaxju00001hpbj1l4d086" class="article-share-link"><i class="fas fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -329,7 +353,7 @@
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/posts/2018/08/23/hello-world/" class="thumbnail">
+                            <a href="/posts/2018/08/28/mongodb-with-mlab/" class="thumbnail">
     
     
         <span class="thumbnail-image thumbnail-none"></span>
@@ -340,8 +364,8 @@
                         
                         <div class="item-inner">
                             <p class="item-category"></p>
-                            <p class="item-title"><a href="/posts/2018/08/23/hello-world/" class="title">Hello World</a></p>
-                            <p class="item-date"><time datetime="2018-08-23T13:34:48.808Z" itemprop="datePublished">2018-08-23</time></p>
+                            <p class="item-title"><a href="/posts/2018/08/28/mongodb-with-mlab/" class="title">Setup MongoDB with mLab</a></p>
+                            <p class="item-date"><time datetime="2018-08-27T14:54:24.000Z" itemprop="datePublished">2018-08-28</time></p>
                         </div>
                     </li>
                 
@@ -362,8 +386,22 @@
 
     
         
+    <div class="widget-wrap">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/posts/tags/Database/">Database</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/posts/tags/MongoDB/">MongoDB</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/posts/tags/mLab/">mLab</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
     
         
+    <div class="widget-wrap">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/posts/tags/Database/" style="font-size: 10px;">Database</a> <a href="/posts/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/posts/tags/mLab/" style="font-size: 10px;">mLab</a>
+        </div>
+    </div>
+
     
         
     <div class="widget-wrap widget-list">
