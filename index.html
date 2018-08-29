@@ -159,11 +159,11 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                2
+                3
                 <span>posts</span>
             </div>
             <div class="article-info-block">
-                5
+                7
                 <span>tags</span>
             </div>
         </div>
@@ -188,6 +188,144 @@
 
             
             <section id="main">
+    <article id="post-return-specific-fields-only-in-mongoDB-query" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/posts/2018/08/29/return-specific-fields-only-in-mongoDB-query/">Return Specific Fields Only In MongoDB Query</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fas fa-calendar-alt"></i>
+        <a href="/posts/2018/08/29/return-specific-fields-only-in-mongoDB-query/">
+            <time datetime="2018-08-29T02:32:36.000Z" itemprop="datePublished">2018-08-29</time>
+        </a>
+    </div>
+
+
+                        
+                        
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/posts/tags/Database/">Database</a>, <a class="tag-link" href="/posts/tags/MongoDB/">MongoDB</a>, <a class="tag-link" href="/posts/tags/Mongoose/">Mongoose</a>, <a class="tag-link" href="/posts/tags/Node-js/">Node.js</a>, <a class="tag-link" href="/posts/tags/Query/">Query</a>, <a class="tag-link" href="/posts/tags/Specific-Fields/">Specific Fields</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>Sometimes we need to hide specific fields from our database to be returned as json. e.g. password, reported status etc. </p>
+<p>We can easily do that in MongoDB using following code. </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> threadSchema = <span class="keyword">new</span> Schema(&#123;</span><br><span class="line">  board           : &#123;<span class="attr">type</span>: <span class="string">'string'</span>, <span class="attr">required</span>: <span class="literal">true</span>&#125;,</span><br><span class="line">  text            : &#123;<span class="attr">type</span>: <span class="string">'string'</span>, <span class="attr">required</span>: <span class="literal">true</span>&#125;,</span><br><span class="line">  delete_password : &#123;<span class="attr">type</span>: <span class="string">'string'</span>, <span class="attr">required</span>: <span class="literal">true</span>&#125;,</span><br><span class="line">  created_on      : &#123; <span class="attr">type</span>: <span class="built_in">Date</span>, <span class="attr">default</span>: <span class="built_in">Date</span>.now &#125;,</span><br><span class="line">  bumped_on       : &#123; <span class="attr">type</span>: <span class="built_in">Date</span>, <span class="attr">default</span>: <span class="built_in">Date</span>.now &#125;,</span><br><span class="line">  reported        : <span class="built_in">Boolean</span>,</span><br><span class="line">  replies         : [&#123;<span class="attr">text</span>: <span class="built_in">String</span>,<span class="attr">created_on</span>: &#123; <span class="attr">type</span>: <span class="built_in">Date</span>, <span class="attr">default</span>: <span class="built_in">Date</span>.now &#125;, <span class="attr">reported</span>: <span class="built_in">Boolean</span>, <span class="attr">delete_password</span>: <span class="built_in">String</span>&#125;],</span><br><span class="line">  replycount      : <span class="built_in">Number</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// we need to convert our threadSchema into a Model we can work with. </span></span><br><span class="line"><span class="comment">// To do so, we pass it into mongoose.model(modelName, schema):</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Thread = mongoose.model(<span class="string">'Thread'</span>, threadSchema);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> board = req.params.board</span><br><span class="line"></span><br><span class="line">Thread.find(&#123;<span class="attr">board</span>: board&#125;&#125;,</span><br><span class="line">            &#123;</span><br><span class="line">              reported                  : <span class="number">0</span>, </span><br><span class="line">              delete_password           : <span class="number">0</span>,</span><br><span class="line">              <span class="string">"replies.delete_password"</span> : <span class="number">0</span>, </span><br><span class="line">              <span class="string">"replies.reported"</span>        : <span class="number">0</span></span><br><span class="line">              &#125;)</span><br><span class="line">  .then(<span class="function">(<span class="params">data</span>) =&gt;</span> &#123;</span><br><span class="line">    res.json(data);</span><br><span class="line">  &#125;).catch(<span class="function"><span class="params">err</span> =&gt;</span> next(err));</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ol>
+<li><p>Here we are hiding reported and delete_password by assigning the value 0. In this case it will return all the other fields except reported and delete_password.</p>
+</li>
+<li><p>If you want to only return one field then assign the value 1 to that field. eg  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;replycount: 1&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol start="3">
+<li>We can also hide fields from nested array. In that case we have to use </li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#123;&quot;array.field&quot;:0&#125;</span><br><span class="line"></span><br><span class="line">//eg </span><br><span class="line"></span><br><span class="line">&#123;&quot;replies.delete_password&quot;: 0, &quot;replies.reported&quot;: 0&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://tanimmahmud.github.io/posts/2018/08/29/return-specific-fields-only-in-mongoDB-query/" data-id="cjlejuf4d0000yppbn9b6k1ju" class="article-share-link"><i class="fas fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fab fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fab fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fab fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fab fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
     <article id="post-project" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -281,7 +419,7 @@
 
 </div>
 
-    <a data-url="https://tanimmahmud.github.io/posts/2018/08/28/project/" data-id="cjldw96cv0001pfpb7l4agahd" class="article-share-link"><i class="fas fa-share"></i>Share</a>
+    <a data-url="https://tanimmahmud.github.io/posts/2018/08/28/project/" data-id="cjlejuf5f000eyppblklbecix" class="article-share-link"><i class="fas fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -433,7 +571,7 @@
 
 </div>
 
-    <a data-url="https://tanimmahmud.github.io/posts/2018/08/28/mongodb-with-mlab/" data-id="cjldw96cq0000pfpbc1gaewgb" class="article-share-link"><i class="fas fa-share"></i>Share</a>
+    <a data-url="https://tanimmahmud.github.io/posts/2018/08/28/mongodb-with-mlab/" data-id="cjlejuf5d000dyppb1dwhdcev" class="article-share-link"><i class="fas fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -522,6 +660,25 @@
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/posts/2018/08/29/return-specific-fields-only-in-mongoDB-query/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/posts/2018/08/29/return-specific-fields-only-in-mongoDB-query/" class="title">Return Specific Fields Only In MongoDB Query</a></p>
+                            <p class="item-date"><time datetime="2018-08-29T02:32:36.000Z" itemprop="datePublished">2018-08-29</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/posts/2018/08/28/project/" class="thumbnail">
     
     
@@ -568,7 +725,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">archives</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/posts/archives/2018/08/">August 2018</a><span class="archive-list-count">2</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/posts/archives/2018/08/">August 2018</a><span class="archive-list-count">3</span></li></ul>
         </div>
     </div>
 
@@ -577,7 +734,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">tags</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/posts/tags/Database/">Database</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/posts/tags/MongoDB/">MongoDB</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/posts/tags/Mongoose/">Mongoose</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/posts/tags/Node-js/">Node.js</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/posts/tags/mLab/">mLab</a><span class="tag-list-count">2</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/posts/tags/Database/">Database</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/posts/tags/MongoDB/">MongoDB</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/posts/tags/Mongoose/">Mongoose</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/posts/tags/Node-js/">Node.js</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/posts/tags/Query/">Query</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/posts/tags/Specific-Fields/">Specific Fields</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/posts/tags/mLab/">mLab</a><span class="tag-list-count">2</span></li></ul>
         </div>
     </div>
 
@@ -586,7 +743,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">tag cloud</h3>
         <div class="widget tagcloud">
-            <a href="/posts/tags/Database/" style="font-size: 20px;">Database</a> <a href="/posts/tags/MongoDB/" style="font-size: 20px;">MongoDB</a> <a href="/posts/tags/Mongoose/" style="font-size: 10px;">Mongoose</a> <a href="/posts/tags/Node-js/" style="font-size: 10px;">Node.js</a> <a href="/posts/tags/mLab/" style="font-size: 20px;">mLab</a>
+            <a href="/posts/tags/Database/" style="font-size: 20px;">Database</a> <a href="/posts/tags/MongoDB/" style="font-size: 20px;">MongoDB</a> <a href="/posts/tags/Mongoose/" style="font-size: 15px;">Mongoose</a> <a href="/posts/tags/Node-js/" style="font-size: 15px;">Node.js</a> <a href="/posts/tags/Query/" style="font-size: 10px;">Query</a> <a href="/posts/tags/Specific-Fields/" style="font-size: 10px;">Specific Fields</a> <a href="/posts/tags/mLab/" style="font-size: 15px;">mLab</a>
         </div>
     </div>
 
