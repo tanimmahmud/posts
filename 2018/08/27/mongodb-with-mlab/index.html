@@ -3,18 +3,20 @@
 <head>
     <meta charset="utf-8">
     
-    <title>Tag: Query | Tanim&#39;s blog</title>
+    <title>Setup MongoDB with mLab | Tanim&#39;s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="Tanim&apos;s personal blog about programming">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Tanim&#39;s blog">
-<meta property="og:url" content="https://tanimmahmud.github.io/posts/tags/Query/index.html">
+    <meta name="description" content="Createa a mLab account from https://mlab.com/  Create new Database   Go inside the Database and ‘Add database user’  Save username and password somewhere save. You will need these for later use.  Cop">
+<meta name="keywords" content="MongoDB,mLab,Database">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Setup MongoDB with mLab">
+<meta property="og:url" content="https://tanimmahmud.github.io/posts/2018/08/27/mongodb-with-mlab/index.html">
 <meta property="og:site_name" content="Tanim&#39;s blog">
-<meta property="og:description" content="Tanim&apos;s personal blog about programming">
+<meta property="og:description" content="Createa a mLab account from https://mlab.com/  Create new Database   Go inside the Database and ‘Add database user’  Save username and password somewhere save. You will need these for later use.  Cop">
 <meta property="og:locale" content="English">
+<meta property="og:updated_time" content="2018-08-29T07:24:51.840Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Tanim&#39;s blog">
-<meta name="twitter:description" content="Tanim&apos;s personal blog about programming">
+<meta name="twitter:title" content="Setup MongoDB with mLab">
+<meta name="twitter:description" content="Createa a mLab account from https://mlab.com/  Create new Database   Go inside the Database and ‘Add database user’  Save username and password somewhere save. You will need these for later use.  Cop">
     
 
     
@@ -187,45 +189,190 @@
 </aside>
 
             
-            <section id="main">
-<div class="timeline timeline-wrap">
-    <div class="timeline-row timeline-row-major">
-        <span class="node"><i class="fas fa-tag"></i></span>
-        <h1 class="title">#Query</h1>
-    </div>
-    
-        <div class="timeline-row">
-            <span class="node"></span>
-            <div class="content">
+            <section id="main"><article id="post-mongodb-with-mlab" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
                 
     
-        <h1 itemprop="name">
-            <a class="timeline-article-title" href="/posts/2018/08/29/return-specific-fields-only-in-mongoDB-query/">Return Specific Fields Only In MongoDB Query</a>
+        <h1 class="article-title" itemprop="name">
+            Setup MongoDB with mLab
         </h1>
     
 
-                <div class="article-meta">
-                    
+                
+                    <div class="article-meta">
+                        
     <div class="article-date">
         <i class="fas fa-calendar-alt"></i>
-        <a href="/posts/2018/08/29/return-specific-fields-only-in-mongoDB-query/">
-            <time datetime="2018-08-29T02:32:36.000Z" itemprop="datePublished">2018-08-29</time>
+        <a href="/posts/2018/08/27/mongodb-with-mlab/">
+            <time datetime="2018-08-26T14:54:24.000Z" itemprop="datePublished">2018-08-27</time>
         </a>
     </div>
 
 
-                    
-                    
+                        
+                        
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/posts/tags/Database/">Database</a>, <a class="tag-link" href="/posts/tags/MongoDB/">MongoDB</a>, <a class="tag-link" href="/posts/tags/Mongoose/">Mongoose</a>, <a class="tag-link" href="/posts/tags/Node-js/">Node.js</a>, <a class="tag-link" href="/posts/tags/Query/">Query</a>, <a class="tag-link" href="/posts/tags/Specific-Fields/">Specific Fields</a>
+        <a class="tag-link" href="/posts/tags/Database/">Database</a>, <a class="tag-link" href="/posts/tags/MongoDB/">MongoDB</a>, <a class="tag-link" href="/posts/tags/mLab/">mLab</a>
     </div>
 
-                </div>
-            </div>
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <ol>
+<li><p>Createa a mLab account from <a href="https://mlab.com/" target="_blank" rel="noopener">https://mlab.com/</a></p>
+</li>
+<li><p>Create new Database </p>
+</li>
+<li><p>Go inside the Database and ‘Add database user’</p>
+</li>
+<li><p>Save username and password somewhere save. You will need these for later use.</p>
+</li>
+<li><p>Copy standard MongoDB URI</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongodb://&lt;dbuser&gt;:&lt;dbpassword&gt;@ds133252.mlab.com:33252/message-board</span><br></pre></td></tr></table></figure>
+<ol start="6">
+<li><p>Replace <dbuser> with username and <dbpassword> with password. </dbpassword></dbuser></p>
+</li>
+<li><p>Save this to your .env file </p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DB=mongodb://&lt;dbuser&gt;:&lt;dbpassword&gt;@ds133252.mlab.com:33252/message-board</span><br></pre></td></tr></table></figure>
+<ol start="8">
+<li><p>Install mongodb in you project</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install mongodb --save</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Require MongoClient and connect database with you app using following code </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Require MongoClient from mongodb package.</span></span><br><span class="line"><span class="keyword">const</span> MongoClient = <span class="built_in">require</span>(<span class="string">'mongodb'</span>).MongoClient;</span><br><span class="line"></span><br><span class="line"><span class="comment">//Database url from .env file</span></span><br><span class="line"><span class="keyword">const</span> url = process.env.DB;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Connect MongoClient with url</span></span><br><span class="line">MongoClient.connect(url, (err,db) =&gt; &#123;</span><br><span class="line">  <span class="keyword">if</span>(db)&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// get database name from db object</span></span><br><span class="line">    <span class="built_in">console</span>.log(db.s.databaseName,<span class="string">'database successfully connected'</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//Routing for API after database successfully connected</span></span><br><span class="line">    apiRoutes(app);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'database err'</span>, err);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+        
         </div>
-    
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
 </div>
+
+    <a data-url="https://tanimmahmud.github.io/posts/2018/08/27/mongodb-with-mlab/" data-id="cjlevqy6b0000eepbflxw1kq9" class="article-share-link"><i class="fas fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fab fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fab fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fab fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fab fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="https://tanimmahmud.github.io/posts/2018/08/27/mongodb-with-mlab/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="https://tanimmahmud.github.io/posts/2018/08/27/mongodb-with-mlab/">Comments</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/posts/2018/08/28/project/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Newer</strong>
+            <div class="article-nav-title">
+                
+                    Steps to use Mongoose on your Node.js project
+                
+            </div>
+        </a>
+    
+    
+        <a href="/posts/2018/08/26/Update-Documents-in-an-Array/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">Update Documents in an Array Using MongoDB</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    
+        <section id="comments">
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+</section>
+    
+
 </section>
             
                 
@@ -377,11 +524,13 @@
     <script>
     var disqus_config = function () {
         
-        this.page.identifier = '';
+            this.page.url = 'https://tanimmahmud.github.io/posts/2018/08/27/mongodb-with-mlab/';
+        
+        this.page.identifier = 'mongodb-with-mlab';
     };
     (function() { 
         var d = document, s = d.createElement('script');  
-        s.src = '//' + 'tanim' + '.disqus.com/count.js';
+        s.src = '//' + 'tanim' + '.disqus.com/embed.js';
         s.setAttribute('data-timestamp', +new Date());
         (d.head || d.body).appendChild(s);
     })();
