@@ -3,20 +3,18 @@
 <head>
     <meta charset="utf-8">
     
-    <title>Return Specific Fields Only In MongoDB Query | Tanim&#39;s blog</title>
+    <title>Archive: 2017 | Tanim&#39;s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="Sometimes we need to hide specific fields from our database to be returned as json. e.g. password, reported status etc.  We can easily do that in MongoDB using following code.  12345678910111213141516">
-<meta name="keywords" content="MongoDB,Database,Node.js,Mongoose,Query,Specific Fields">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Return Specific Fields Only In MongoDB Query">
-<meta property="og:url" content="https://tanimmahmud.github.io/posts/2018/08/29/return-specific-fields-only-in-mongoDB-query/index.html">
+    <meta name="description" content="Tanim&apos;s personal blog about programming">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Tanim&#39;s blog">
+<meta property="og:url" content="https://tanimmahmud.github.io/posts/archives/2017/index.html">
 <meta property="og:site_name" content="Tanim&#39;s blog">
-<meta property="og:description" content="Sometimes we need to hide specific fields from our database to be returned as json. e.g. password, reported status etc.  We can easily do that in MongoDB using following code.  12345678910111213141516">
+<meta property="og:description" content="Tanim&apos;s personal blog about programming">
 <meta property="og:locale" content="English">
-<meta property="og:updated_time" content="2018-08-29T02:54:44.520Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Return Specific Fields Only In MongoDB Query">
-<meta name="twitter:description" content="Sometimes we need to hide specific fields from our database to be returned as json. e.g. password, reported status etc.  We can easily do that in MongoDB using following code.  12345678910111213141516">
+<meta name="twitter:title" content="Tanim&#39;s blog">
+<meta name="twitter:description" content="Tanim&apos;s personal blog about programming">
     
 
     
@@ -189,167 +187,45 @@
 </aside>
 
             
-            <section id="main"><article id="post-return-specific-fields-only-in-mongoDB-query" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
+            <section id="main"><div class="timeline timeline-wrap">
+    
+            <div class="timeline-row timeline-row-major">
+                <span class="node"><i class="fas fa-calendar-alt"></i></span>
+                <h1 class="title">2017</h1>
+            </div>
         
-        
-            <header class="article-header">
+        <div class="timeline-row">
+            <span class="node"></span>
+            <div class="content">
                 
     
-        <h1 class="article-title" itemprop="name">
-            Return Specific Fields Only In MongoDB Query
+        <h1 itemprop="name">
+            <a class="timeline-article-title" href="/posts/2017/01/01/stepts-to-follow-developing-a-react-app-from-scratch/">stepts to follow developing a react app from scratch</a>
         </h1>
     
 
-                
-                    <div class="article-meta">
-                        
+                <div class="article-meta">
+                    
     <div class="article-date">
         <i class="fas fa-calendar-alt"></i>
-        <a href="/posts/2018/08/29/return-specific-fields-only-in-mongoDB-query/">
-            <time datetime="2018-08-29T02:32:36.000Z" itemprop="datePublished">2018-08-29</time>
+        <a href="/posts/2017/01/01/stepts-to-follow-developing-a-react-app-from-scratch/">
+            <time datetime="2017-01-01T03:56:41.000Z" itemprop="datePublished">2017-01-01</time>
         </a>
     </div>
 
 
-                        
-                        
+                    
+                    
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/posts/tags/Database/">Database</a>, <a class="tag-link" href="/posts/tags/MongoDB/">MongoDB</a>, <a class="tag-link" href="/posts/tags/Mongoose/">Mongoose</a>, <a class="tag-link" href="/posts/tags/Node-js/">Node.js</a>, <a class="tag-link" href="/posts/tags/Query/">Query</a>, <a class="tag-link" href="/posts/tags/Specific-Fields/">Specific Fields</a>
+        <a class="tag-link" href="/posts/tags/React/">React</a>
     </div>
 
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <p>Sometimes we need to hide specific fields from our database to be returned as json. e.g. password, reported status etc. </p>
-<p>We can easily do that in MongoDB using following code. </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> threadSchema = <span class="keyword">new</span> Schema(&#123;</span><br><span class="line">  board           : &#123;<span class="attr">type</span>: <span class="string">'string'</span>, <span class="attr">required</span>: <span class="literal">true</span>&#125;,</span><br><span class="line">  text            : &#123;<span class="attr">type</span>: <span class="string">'string'</span>, <span class="attr">required</span>: <span class="literal">true</span>&#125;,</span><br><span class="line">  delete_password : &#123;<span class="attr">type</span>: <span class="string">'string'</span>, <span class="attr">required</span>: <span class="literal">true</span>&#125;,</span><br><span class="line">  created_on      : &#123; <span class="attr">type</span>: <span class="built_in">Date</span>, <span class="attr">default</span>: <span class="built_in">Date</span>.now &#125;,</span><br><span class="line">  bumped_on       : &#123; <span class="attr">type</span>: <span class="built_in">Date</span>, <span class="attr">default</span>: <span class="built_in">Date</span>.now &#125;,</span><br><span class="line">  reported        : <span class="built_in">Boolean</span>,</span><br><span class="line">  replies         : [&#123;<span class="attr">text</span>: <span class="built_in">String</span>,<span class="attr">created_on</span>: &#123; <span class="attr">type</span>: <span class="built_in">Date</span>, <span class="attr">default</span>: <span class="built_in">Date</span>.now &#125;, <span class="attr">reported</span>: <span class="built_in">Boolean</span>, <span class="attr">delete_password</span>: <span class="built_in">String</span>&#125;],</span><br><span class="line">  replycount      : <span class="built_in">Number</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// we need to convert our threadSchema into a Model we can work with. </span></span><br><span class="line"><span class="comment">// To do so, we pass it into mongoose.model(modelName, schema):</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Thread = mongoose.model(<span class="string">'Thread'</span>, threadSchema);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> board = req.params.board</span><br><span class="line"></span><br><span class="line">Thread.find(&#123;<span class="attr">board</span>: board&#125;&#125;,</span><br><span class="line">            &#123;</span><br><span class="line">              reported                  : <span class="number">0</span>, </span><br><span class="line">              delete_password           : <span class="number">0</span>,</span><br><span class="line">              <span class="string">"replies.delete_password"</span> : <span class="number">0</span>, </span><br><span class="line">              <span class="string">"replies.reported"</span>        : <span class="number">0</span></span><br><span class="line">              &#125;)</span><br><span class="line">  .then(<span class="function">(<span class="params">data</span>) =&gt;</span> &#123;</span><br><span class="line">    res.json(data);</span><br><span class="line">  &#125;).catch(<span class="function"><span class="params">err</span> =&gt;</span> next(err));</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<ol>
-<li><p>Here we are hiding reported and delete_password by assigning the value 0. In this case it will return all the other fields except reported and delete_password.</p>
-</li>
-<li><p>If you want to only return one field then assign the value 1 to that field. eg  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;replycount: 1&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<ol start="3">
-<li>We can also hide fields from nested array. In that case we have to use </li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#123;&quot;array.field&quot;:0&#125;</span><br><span class="line"></span><br><span class="line">//eg </span><br><span class="line"></span><br><span class="line">&#123;&quot;replies.delete_password&quot;: 0, &quot;replies.reported&quot;: 0&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-        
+                </div>
+            </div>
         </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
+    
 </div>
-
-    <a data-url="https://tanimmahmud.github.io/posts/2018/08/29/return-specific-fields-only-in-mongoDB-query/" data-id="cjlltf4tt0005d2v55s9bitsw" class="article-share-link"><i class="fas fa-share"></i>Share</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fab fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fab fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fab fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fab fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-        <a href="https://tanimmahmud.github.io/posts/2018/08/29/return-specific-fields-only-in-mongoDB-query/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="https://tanimmahmud.github.io/posts/2018/08/29/return-specific-fields-only-in-mongoDB-query/">Comments</a>
-    
-
-        </footer>
-    </div>
-    
-        
-<nav id="article-nav">
-    
-    
-        <a href="/posts/2018/08/28/project/" id="article-nav-older" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">Older</strong>
-            <div class="article-nav-title">Steps to use Mongoose on your Node.js project</div>
-        </a>
-    
-</nav>
-
-
-    
-</article>
-
-
-    
-    
-        <section id="comments">
-    <div id="disqus_thread">
-        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    </div>
-</section>
-    
-
 </section>
             
                 
@@ -520,13 +396,11 @@
     <script>
     var disqus_config = function () {
         
-            this.page.url = 'https://tanimmahmud.github.io/posts/2018/08/29/return-specific-fields-only-in-mongoDB-query/';
-        
-        this.page.identifier = 'return-specific-fields-only-in-mongoDB-query';
+        this.page.identifier = '';
     };
     (function() { 
         var d = document, s = d.createElement('script');  
-        s.src = '//' + 'tanim' + '.disqus.com/embed.js';
+        s.src = '//' + 'tanim' + '.disqus.com/count.js';
         s.setAttribute('data-timestamp', +new Date());
         (d.head || d.body).appendChild(s);
     })();
